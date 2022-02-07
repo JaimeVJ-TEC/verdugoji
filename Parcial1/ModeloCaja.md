@@ -7,7 +7,16 @@ Las cajas de una página se crean automáticamente. Cada vez que se inserta una 
 
 ![Imagen Ejemplo del modelo de caja](Resources/Box%20Model.gif)
 
-A todas las cajas se les puede aplicar las siguientes propiedades: width, height, padding, margin, border, background. Lo particular de este concepto es que por defecto el width se refiere al ancho del contenido de un elemento (no al ancho total, de borde a borde). 
+A todas las cajas se les puede aplicar las siguientes propiedades:
+
+1. Width (Ancho).
+2. Height (Altura).
+3. Padding (Relleno).
+4. Margin (Margen).
+5. Border (Orilla).
+6. Background (Fondo).
+
+Lo particular de este concepto es que por defecto el width se refiere al ancho del contenido de un elemento (no al ancho total, de borde a borde). 
 
 ![Imagen Propiedades](Resources/Box.png)
 
