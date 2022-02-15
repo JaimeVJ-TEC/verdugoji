@@ -1,0 +1,27 @@
+h1{
+    font-family: 'Open Sans';
+}
+
+table{
+    margin-top: 30;
+    width: 100%;
+    font-family: 'Open Sans';
+    
+}
+
+th{
+    font-size: 20;
+    height: 60;
+    text-align: center;
+    background-color: #804aed;
+    color: white;
+}
+
+table, th, td{
+    padding: 20;
+    border: 0;
+}
+
+tr:nth-child(even){
+    background-color: #f2f2f2;
+}
