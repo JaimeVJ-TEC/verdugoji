@@ -3,7 +3,7 @@
 
 El modelo de caja es la manera en que se representan todos los elementos html en una página. Cada elemento genera una caja, el comportamiento de esa caja depende de su clasificación: si es de línea o de bloque.
 
-Las cajas de una página se crean automáticamente. Cada vez que se inserta una etiqueta HTML, se crea una nueva caja rectangular que encierra los contenidos de ese elemento. 
+Las cajas de una página se crean automáticamente. Cada vez que se inserta una etiqueta HTML, se crea una nueva caja rectangular que encierra los contenidos de ese elemento.
 
 ![Imagen Ejemplo del modelo de caja](Resources/Box%20Model.gif)
 
@@ -16,7 +16,7 @@ A todas las cajas se les puede aplicar las siguientes propiedades:
 5. Border (Orilla).
 6. Background (Fondo).
 
-Lo particular de este concepto es que por defecto el width se refiere al ancho del contenido de un elemento (no al ancho total, de borde a borde). 
+Lo particular de este concepto es que por defecto el width se refiere al ancho del contenido de un elemento (no al ancho total, de borde a borde).
 
 ![Imagen Propiedades](Resources/Box.png)
 
@@ -49,3 +49,4 @@ Existen propiedades que definen el valor máximo o mínimo, éstas permiten mayo
 - **Max-height**: alto máximo. El elemento no puede ser más alto que el valor especificado pero sí puede achicarse.
 
 - **Min-height**: alto mínimo. El elemento no puede ser más bajo que el valor especificado pero sí puede agrandarse.
+  
