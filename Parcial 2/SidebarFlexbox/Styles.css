@@ -1,7 +1,3 @@
-html, body{
-    height: 100%;
-}
-
 * {
     box-sizing:border-box;
     margin: 0;
@@ -9,19 +5,23 @@ html, body{
     font-family: 'Open Sans';
 }
 
+.flex{
+    display: flex;
+    height: 100vh;
+}
+
 div.sidebar{
     background-color: rgb(145, 211, 183);
-    position: fixed;
     width: 200px;
-    height: 100%;
-    overflow:auto;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
 }
 
 div.content{
     background-color: whitesmoke;
-    margin-left: 200px;
+    flex-grow: 1;
     padding: 20px;
-    height: 100%;
 }
 
 a{
@@ -47,29 +47,35 @@ a:hover{
 #op1:target,
 #op2:target,
 #op3:target,
-#op4:target { display: block}
+#op4:target { display: block;}
 
 @media screen and (max-width:1000px) {
+    .flex{
+        flex-direction: column;
+    }
+
     div.sidebar{
-        position:relative;
+        flex-direction: row;
         width: 100%;
-        height:auto;
+        align-content: stretch;
     }
+
     .sidebar a{
-        float: left;
-        padding-right: 10px;
-    }
-    div.content{
-        margin-left: 0;
+        flex-grow: 1;
+        text-align: center;
     }
 }
 
 @media screen and (max-width: 600px) {
-    .sidebar a {
-      float: none;
-      text-align: center;
+    .flex{
+        flex-direction: column;
     }
-  }
+    
+    div.sidebar{
+        flex-direction: column;
+        width: 100%;
+    }
+}
 
 table{
     width: 600px;
