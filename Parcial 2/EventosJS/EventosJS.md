@@ -10,7 +10,7 @@ Los controladores de eventos se pueden usar para manejar y verificar la entrada 
 
 ## Burbujeo de eventos en JavaScript
 
-El burbujeo de eventos es un método de propagación de eventos en la API HTML DOM cuando un evento está en un elemento dentro de otro elemento y ambos elementos han registrado un identificador para ese evento. 
+El burbujeo de eventos es un método de propagación de eventos en la API HTML DOM cuando un evento está en un elemento dentro de otro elemento y ambos elementos han registrado un identificador para ese evento.
 
 Es un proceso que comienza con el elemento que desencadenó el evento y luego asciende a los elementos que lo contienen en la jerarquía. En el burbujeo de eventos, el evento primero es capturado y manejado por el elemento más interno y luego se propaga a los elementos externos.
 
@@ -31,4 +31,3 @@ Un evento burbujeante va desde el elemento destino directamente hacia arriba. No
 Pero cualquier controlador puede decidir que el evento se ha procesado por completo y detener el burbujeo.
 
 El método para ello es event.stopPropagation().
-
