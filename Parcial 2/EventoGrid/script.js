@@ -7,4 +7,4 @@ window.onload = function()
         if(e.target.id !== "grid1")
         document.getElementById(e.target.id).classList.toggle("cajaToggle");
     });
-}
+} 
