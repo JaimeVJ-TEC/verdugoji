@@ -71,7 +71,8 @@ $(document).ready(function() {
                     $('#correo').val(datos.Correo);
                     $('#telefono').val(datos.Telefono);
                     $('#celular').val(datos.Movil);
-                    $('#direccion').val(datos.Direccion);}
+                    $('#direccion').val(datos.Direccion);
+                    }
                     );
     });
 
