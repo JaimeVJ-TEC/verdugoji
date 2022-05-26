@@ -14,7 +14,7 @@ $(document).ready(function() {
     });
 
     $('#btnJSON').click(function() {
-        $.post('archivo.php',{},function(data){
+        $.post('./php/archivo.php',{},function(data){
 
               console.log(data);
               $('#id_alumno').val(data.NumControl);
@@ -29,7 +29,7 @@ $(document).ready(function() {
     $('#btnDB').click(function() {
         let idalumno = prompt("Teclee el ID a consultar");
 
-        $.post('DB.php',{id:idalumno},function(data){
+        $.post('./php/DB.php',{id:idalumno},function(data){
             refrescar(data);
         },'json');
     });
@@ -58,7 +58,7 @@ $(document).ready(function() {
                 document.getElementById("divHeader").innerHTML = solicitud.responseText; 
         }};
         
-        solicitud.open("GET", "Archivo.txt", true);
+        solicitud.open("GET", "./resources/Archivo.txt", true);
         solicitud.send();
         
          }
@@ -78,7 +78,7 @@ $(document).ready(function() {
                     resolve(solicitud.response);
                 }
             }
-            solicitud.open("GET","ArchivoPromesa.txt",true);
+            solicitud.open("GET","./resources/ArchivoPromesa.txt",true);
             solicitud.send();
         });
 
@@ -89,7 +89,7 @@ $(document).ready(function() {
     //Fetch
     $('#btnFetch').click(function()
     {
-        let promesa = fetch('archivo.php');
+        let promesa = fetch('./php/archivo.php');
 
         //promesa.then(respuesta => respuesta.json())
         //      .then(datos => console.log(datos));
