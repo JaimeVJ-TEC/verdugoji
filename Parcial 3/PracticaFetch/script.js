@@ -1,5 +1,17 @@
 $(document).ready(function() {
 
+    $('#btnSubmit').click(function(){
+        $('#alert1').show();
+    });
+
+    $('#btnCloseAlert').click(function(){
+        $('#alert1').hide();
+    });
+
+    $('#btnReset').click(function(){
+        $('#exampleModal').modal('show');
+    });
+
     $('#btnJSON').click(function() {
         $.post('archivo.php',{},function(data){
 
