@@ -28,7 +28,7 @@
           </div>
 
         <div class="row">
-            <div class="form-group col-sm-12 col-md-12 col-lg-4">
+            <div class="form-group col-sm-12 col-md-6 col-lg-4">
                 <label for="id_alumno" class="control-label">No. Control</label>
                 <input id="id_alumno" class="form-control">
             </div>
@@ -64,59 +64,72 @@
         </div>
 
         <div class="row">
-            Genero
-        </div>
-        <div class="row">
-            <div class="form-check col sm-12 col-md-2 col-lg-2">
-                <input class="form-check-input" type="radio" name="radBtn" id="radioBtn1">
-                <label class="form-check-label" for="radioBtn1">
-                  Masculino
-                </label>
-            </div>
-            <div class="form-check col sm-12 col-md-2 col-lg-2">
-                <input class="form-check-input" type="radio" name="radBtn" id="radioBtn2">
-                <label class="form-check-label" for="radioBtn2">
-                  Femenino
-                </label>
-            </div>
-        </div>
-        <br/>
-        <div class="row">
-            ¿Padece alguna discapacidad?
-        </div>
-        <div class="row">
-            <div class="form-check col sm-12 col-md-12 col-lg-12">
-                <input class="form-check-input " type="checkbox" value="discapacidad" id="flexCheckDefault">
-                    <label class="form-check-label" for="flexCheckDefault">
-                    Discapacidad
-                    </label>
-            </div>
+              <div class="form-check col sm-12 col-md-4 col-lg-4">
+                <label for="Genero" class="control-label">Genero</label>
+                <div id="Genero" class="row">
+
+                  <div class="form-check col sm-6 col-md-6 col-lg-6">
+                    <input class="form-check-input" type="radio" name="radBtn" id="genM">
+                    <label class="form-check-label" for="genM">Masculino  </label>
+                  </div>
+
+                  <div class="form-check col sm-6 col-md-6 col-lg-6">
+                    <input class="form-check-input" type="radio" name="radBtn" id="genF">
+                    <label class="form-check-label" for="genF">Femenino   </label>
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="form-check col sm-12 col-md-4 col-lg-4">
+                <label for="discapacidad" class="control-label">¿Padece alguna discapacidad?</label>
+                  <div id="discapacidad" class="row">
+                    <div class="form-check col sm-12 col-md-12 col-lg-12">
+                      <input class="form-check-input " type="checkbox" value="discapacidad" id="chkDiscapacidad">
+                      <label class="form-check-label" for="chkDiscapacidad">Discapacidad</label>
+                    </div>
+                  </div>
+              </div>
+
+              <div class="form-check col sm-12 col-md-4 col-lg-4">
+                <label for="civil" class="control-label">Estado civil</label>
+                <div id="civil" class="row">
+                  <div class="form-check col sm-6 col-md-6 col-lg-6">
+                    <input class="form-check-input" type="radio" name="radBtn" id="civCas">
+                    <label class="form-check-label" for="genM">Casado  </label>
+                  </div>
+
+                  <div class="form-check col sm-6 col-md-6 col-lg-6">
+                    <input class="form-check-input" type="radio" name="radBtn" id="civSol">
+                    <label class="form-check-label" for="genF">Soltero   </label>
+                  </div>
+                </div>
+              </div>
         </div>
 
-        <br/>
-        <label class="control-label" >Estado civil.  </label>
-        <div class="row">
-            <div class="form-check col sm-12 col-md-2 col-lg-2">
-                <input class="form-check-input" type="radio" name="radBtn" id="radioBtn1">
-                <label class="form-check-label" for="radioBtn1">
-                  Casado
-                </label>
-            </div>
-            <div class="form-check col sm-12 col-md-2 col-lg-2">
-                <input class="form-check-input" type="radio" name="radBtn" id="radioBtn2">
-                <label class="form-check-label" for="radioBtn2">
-                  Soltero
-                </label>
-            </div>
-        </div>
-        <br/>
+      </br>
 
+      <div class="row">
+        <button id="btnSubmit" type="button" class="btn btn-primary">Submit</button>
 
-      <button id="btnSubmit" type="button" class="btn btn-primary">Submit</button>
+        <button id="btnReset1" type="reset" class="btn btn-default" data-toggle="modal" data-target="#exampleModal">
+          Lanzar Modal Bootstrap
+        </button>
 
-      <button id="btnReset1" type="reset" class="btn btn-default" data-toggle="modal" data-target="#exampleModal">
-        Lanzar Modal Bootstrap
-      </button>
+        <button id="btnReset" type="reset" class="btn btn-default">Lanzar Modal JS</button>
+
+        <button id="btnJSON" type="button" class="btn btn-primary">Boton JSON</button>
+
+        <button id="btnAjax" type="button" class="btn btn-primary">Cambiar Header con Ajax</button>
+      
+        <button id="btnAjaxReset" type="button" class="btn btn-primary">Reiniciar Header con Ajax</button>
+      
+        <button id="btnProm" type="button" class="btn btn-primary">Boton Promesa</button>
+
+        <button id="btnFetch" type="button" class="btn btn-success">Boton Fetch</button>
+
+        <button id="btnDB" type="button" class="btn btn-success">Boton DB</button>
+      </div>
       
       <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -137,21 +150,6 @@
           </div>
         </div>
       </div>
-      
-      <button id="btnReset" type="reset" class="btn btn-default">Lanzar Modal JS</button>
-
-      <button id="btnJSON" type="button" class="btn btn-primary">Boton JSON</button>
-
-      <button id="btnAjax" type="button" class="btn btn-primary">Cambiar Header con Ajax</button>
-      
-      <button id="btnAjaxReset" type="button" class="btn btn-primary">Reiniciar Header con Ajax</button>
-      
-      <button id="btnProm" type="button" class="btn btn-primary">Boton Promesa</button>
-
-      <button id="btnFetch" type="button" class="btn btn-success">Boton Fetch</button>
-
-      <button id="btnDB" type="button" class="btn btn-success">Boton DB</button>
-
     </form>
     <div>
 </body>
