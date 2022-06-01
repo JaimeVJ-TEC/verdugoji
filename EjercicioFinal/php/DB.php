@@ -4,7 +4,7 @@ $idalumno=$_POST['id'];
 $servername = 'localhost';
 $username = 'root';
 $password = '';
-$dbname = '19100265';
+$dbname = 'j19100265';
 $port = '3306';
 
 try{
