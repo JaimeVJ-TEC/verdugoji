@@ -1,10 +1,4 @@
 $(document).ready(function() {
-
-    
-    $('#btnSubmit').click(function(){
-        $('#alert1').show();
-    });
-
     $('#btnCloseAlert').click(function(){
         $('#alert1').hide();
     });
@@ -34,9 +28,22 @@ $(document).ready(function() {
         let idalumno = $('#consulta_id').val();
         $('#modalConsulta').modal('hide');
         $('#consulta_id').val('');
+
+        if(idalumno != ""){
         $.post('./php/DB.php',{id:idalumno},function(data){
-            refrescar(data);
+            if(data!=false){
+                refrescar(data);
+            } else {
+                $('#msgError').text('El alumno no existe.');
+                $('#modalError').modal('show');
+            }
+            
         },'json');
+        } else
+        {
+            $('#msgError').text('Ingrese el numero de control.');
+            $('#modalError').modal('show');
+        }
     });
 
     function refrescar(objeto) {
@@ -47,72 +54,39 @@ $(document).ready(function() {
         $('#telefono').val(objeto.telefono);
         $('#celular').val(objeto.celular);
         $('#direccion').val(objeto.direccion);
-        (objeto.genero ==='M' ? $('#genM').prop("checked",true) : $('#genF').prop("checked",true));
+        (objeto.genero ==='M' ? 
+            $('#genM').prop("checked",true) :
+            (objeto.genero ==='F' ? 
+                $('#genF').prop("checked",true) : 
+                $('#genF').prop("checked",false),$('#genM').prop("checked",false)));
+
         (objeto.discapacidad === 1 ? $('#chkDiscapacidad').prop("checked",true) : $('#chkDiscapacidad').prop("checked",false));
-        (objeto.estadoCivil === "Casado" ? $('#civCas').prop("checked",true) : $('#civSol').prop("checked",true));
-    }
-        
-    window.onload = function() {
 
-        document.getElementById("btnAjax").addEventListener("click",pedirHeader);
-        document.getElementById("btnAjaxReset").addEventListener("click",reiniciarHeader);
-        
-        function pedirHeader() {
-        
-        var solicitud = new XMLHttpRequest();          
-        solicitud.onreadystatechange = function() {  
-    
-            if (solicitud.readyState == 4 && solicitud.status == 200) {                
-                document.getElementById("divHeader").innerHTML = solicitud.responseText; 
-        }};
-        
-        solicitud.open("GET", "./resources/Archivo.txt", true);
-        solicitud.send();
-        
-         }
-        
-        function reiniciarHeader() {
-            document.getElementById("divHeader").innerHTML = "<h1 class=\"h3 mb-3 font-weight-normal\">Registro de alumno</h1>"; 
-        }
-        
+        (objeto.estadoCivil === "Casado" ? 
+            $('#civCas').prop("checked",true) : 
+            (objeto.estadoCivil === "Soltero" ? 
+                $('#civSol').prop("checked",true) : 
+                $('#civSol').prop("checked",false),$('#civCas').prop("checked",false)));
     }
 
-    $('#btnProm').click(function()
-    {
-        let promesa = new Promise(function(resolve,reject) {
-            var solicitud = new XMLHttpRequest();
-            solicitud.onreadystatechange = function(){
-                if(solicitud.readyState == 4 && solicitud.status == 200){
-                    resolve(solicitud.response);
-                }
-            }
-            solicitud.open("GET","./resources/ArchivoPromesa.txt",true);
-            solicitud.send();
-        });
+    $('#btnSubmit').click(function() {
+        let nom = null;
+        let cor = $('#correo').val();
+        let tel = $('#telefono').val();
+        let cel = $('#celular').val();
+        let dir = $('#direccion').val();
+        let gen = $('#genF').prop('checked') == true ? 'F' : 'M';
+        let disc= $('#chkDiscapacidad').prop('checked') == true ? true : false;
+        let est = $('#civSol').prop('checked') == true ? 'Soltero' : 'Casado';
 
-        promesa.then(function(value) {document.getElementById("divHeader").innerHTML = value;});
-    });
+        //if(nom!="" && tel!="" && dir!=""){
+        $.post('./php/Registrar.php',{nombre:nom,correo:cor,telefono:tel,celular:cel,direccion:dir,genero:gen,discapacidad:disc,estado:est},function(data){
+            console.log(data);
+        },'json');
+        //}
+        //else{
+        //    $('#alert1').show();
+        //}
 
-
-    //Fetch
-    $('#btnFetch').click(function()
-    {
-        let promesa = fetch('./php/archivo.php');
-
-        //promesa.then(respuesta => respuesta.json())
-        //      .then(datos => console.log(datos));
-
-        promesa.then(respuesta => respuesta.json())
-                .then(datos => {
-                    console.log(datos);
-                    $('#id_alumno').val(datos.NumControl);
-                    $('#nombre').val(datos.Nombre);
-                    $('#correo').val(datos.Correo);
-                    $('#telefono').val(datos.Telefono);
-                    $('#celular').val(datos.Movil);
-                    $('#direccion').val(datos.Direccion);
-                    }
-                    );
-    });
-
+    })
 });

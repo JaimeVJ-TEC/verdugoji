@@ -1,37 +1,24 @@
 <?php
-$idalumno=$_POST['id'];
+include 'conexion.php';
+
 $nombre=$_POST['nombre'];
+$nombre = null;
 $correo=$_POST['correo'];
 $telefono=$_POST['telefono'];
 $celular=$_POST['celular'];
 $direccion=$_POST['direccion'];
 $genero=$_POST['genero'];
-$estado=$_POST['estado'];
 $discapacidad=$_POST['discapacidad'];
-
-$servername = 'localhost';
-$username = 'root';
-$password = '';
-$dbname = 'j19100265';
-$port = '3306';
+$estado=$_POST['estado'];
 
 try{
-    $conn = new PDO("mysql:host=$servername;dbname=$dbname;port=$port",$username,$password);
-}catch(PDOException $e){
-    echo "Connection failed: ". $e->getMessage();
-}
-
-try{
-    $sql = "insert into Alumnos(noControl, nomAlumno, correo,telefono,celular,direccion,genero,estadoCivil,discapacidad) 
-            values($idalumno,$nombre,$correo,$telefono,$celular,$direccion,$genero,$estado,$discapacidad);";
-    if($conn->query($sql) === TRUE){
-        echo "Se ha registrado al alumno";
-    }else {
-        echo "Error al registrar el alumno";
-    }
+    $sql = "insert into Alumnos(nomAlumno, correo,telefono,celular,direccion,genero,estadoCivil,discapacidad) 
+            values('$nombre','$correo','$telefono','$celular','$direccion,'$genero','$estado','$discapacidad');";
+    $query = $conn->prepare($sql);
+    $result = $query->execute();
 }catch(PDOException $e) {
     echo "Error de consulta a la base de datos";
-    echo $e->getMessage();
+    $result = false;
 }
 
 echo json_encode($result);

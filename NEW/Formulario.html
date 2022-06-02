@@ -11,6 +11,8 @@
       <!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script> -->
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
       <script src="./js/script.js"></script>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+      <link rel="stylesheet" href="./css/styles.css">
   </head>
 <body>
     <div id="divHeader" class="container">
@@ -30,7 +32,7 @@
         <div class="row">
             <div class="form-group col-sm-12 col-md-6 col-lg-4">
                 <label for="id_alumno" class="control-label">No. Control</label>
-                <input id="id_alumno" class="form-control">
+                <input id="id_alumno" class="form-control" disabled>
             </div>
 
             <div class="form-group col-sm-12 col-md-6 col-lg-8">
@@ -112,37 +114,6 @@
         <div class="btn-group col-sm-12 col-md-6 col-lg-3" role="group">
           <button id="btnSubmit" type="button" class="btn btn-primary mb-2">Registrar</button>
         </div>
-
-        <div class="btn-group col-sm-12 col-md-6 col-lg-3" role="group">
-          <button id="btnReset1" type="reset" class="btn btn-secondary mb-2" data-toggle="modal" data-target="#exampleModal">
-           Lanzar Modal Bootstrap
-          </button>
-        </div>
-
-        <div class="btn-group col-sm-12 col-md-6 col-lg-3" role="group">
-          <button id="btnReset" type="reset" class="btn btn-secondary mb-2">Lanzar Modal JS</button>
-        </div>
-
-        <div class="btn-group col-sm-12 col-md-6 col-lg-3" role="group">
-          <button id="btnJSON" type="button" class="btn btn-primary mb-2">Boton JSON</button>
-        </div>
-
-        <div class="btn-group col-sm-12 col-md-6 col-lg-3" role="group">
-          <button id="btnAjax" type="button" class="btn btn-primary mb-2">Cambiar Header con Ajax</button>
-        </div>
-
-        <div class="btn-group col-sm-12 col-md-6 col-lg-3" role="group">
-          <button id="btnAjaxReset" type="button" class="btn btn-primary mb-2">Reiniciar Header con Ajax</button>
-        </div>
-
-        <div class="btn-group col-sm-12 col-md-6 col-lg-3" role="group">
-        <button id="btnProm" type="button" class="btn btn-primary mb-2">Boton Promesa</button>
-        </div>
-
-        <div class="btn-group col-sm-12 col-md-6 col-lg-3" role="group">
-          <button id="btnFetch" type="button" class="btn btn-success mb-2">Boton Fetch</button>
-        </div>
-
         <div class="btn-group col-sm-12 col-md-6 col-lg-3" role="group">
           <button id="btnDB" type="button" class="btn btn-success mb-2">Consulta</button>
         </div>
@@ -196,6 +167,26 @@
           </div>
         </div>
       </div>
+
+      <div id="modalError" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-confirm">
+          <div class="modal-content">
+            <div class="modal-header">
+              <div class="icon-box">
+                <i class="material-icons">&#xE5CD;</i>
+              </div>				
+              <h4 class="modal-title w-100">Error</h4>	
+            </div>
+            <div class="modal-body">
+              <p class="text-center" id="msgError"></p>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-danger btn-block" data-dismiss="modal">OK</button>
+            </div>
+          </div>
+        </div>
+      </div>   
+
     </form>
     <div>
 </body>
