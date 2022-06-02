@@ -27,8 +27,13 @@ $(document).ready(function() {
     });
 
     $('#btnDB').click(function() {
-        let idalumno = prompt("Teclee el ID a consultar");
+        $('#modalConsulta').modal('show');
+    });
 
+    $('#btnConsulta').click(function() {
+        let idalumno = $('#consulta_id').val();
+        $('#modalConsulta').modal('hide');
+        $('#consulta_id').val('');
         $.post('./php/DB.php',{id:idalumno},function(data){
             refrescar(data);
         },'json');
@@ -36,12 +41,15 @@ $(document).ready(function() {
 
     function refrescar(objeto) {
         console.log(objeto);
-            $('#id_alumno').val(objeto.noControl);
-            $('#nombre').val(objeto.nomAlumno);
-            $('#correo').val(objeto.correo);
-            $('#telefono').val(objeto.telefono);
-            $('#celular').val(objeto.celular);
-            $('#direccion').val(objeto.direccion);
+        $('#id_alumno').val(objeto.noControl);
+        $('#nombre').val(objeto.nomAlumno);
+        $('#correo').val(objeto.correo);
+        $('#telefono').val(objeto.telefono);
+        $('#celular').val(objeto.celular);
+        $('#direccion').val(objeto.direccion);
+        (objeto.genero ==='M' ? $('#genM').prop("checked",true) : $('#genF').prop("checked",true));
+        (objeto.discapacidad === 1 ? $('#chkDiscapacidad').prop("checked",true) : $('#chkDiscapacidad').prop("checked",false));
+        (objeto.estadoCivil === "Casado" ? $('#civCas').prop("checked",true) : $('#civSol').prop("checked",true));
     }
         
     window.onload = function() {
