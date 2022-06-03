@@ -1,110 +1,147 @@
 $(document).ready(function() {
 
-    
-    $('#btnSubmit').click(function(){
-        $('#alert1').show();
-    });
+    $('#genM').prop("checked",true);
+    $('#civCas').prop("checked",true);
 
     $('#btnCloseAlert').click(function(){
         $('#alert1').hide();
     });
 
-    $('#btnReset').click(function(){
-        $('#exampleModal').modal('show');
-    });
-
-    $('#btnJSON').click(function() {
-        $.post('./php/archivo.php',{},function(data){
-
-              console.log(data);
-              $('#id_alumno').val(data.NumControl);
-              $('#nombre').val(data.Nombre);
-              $('#correo').val(data.Correo);
-              $('#telefono').val(data.Telefono);
-              $('#celular').val(data.Movil);
-              $('#direccion').val(data.Direccion);
-          },'json');
+    $('#btnClr').click(function() {
+        limpiar();
     });
 
     $('#btnDB').click(function() {
-        let idalumno = prompt("Teclee el ID a consultar");
-
-        $.post('./php/DB.php',{id:idalumno},function(data){
-            refrescar(data);
-        },'json');
+        $('#modalConsulta').modal('show');
     });
+
+    $('#btnConsulta').click(function() {
+        let idalumno = $('#consulta_id').val();
+        $('#modalConsulta').modal('hide');
+        $('#consulta_id').val('');
+
+        if(idalumno != ""){
+        $.post('./php/DB.php',{id:idalumno},function(data){
+            if(data!=false){
+                refrescar(data);
+            } else {
+                $('#msgError').text('El alumno no existe.');
+                $('#modalError').modal('show');
+            }
+        },'json');
+        } else
+        {
+            $('#msgError').text('Ingrese el numero de control.');
+            $('#modalError').modal('show');
+        }
+    });
+
+    function limpiar(){
+        $('#id_alumno').val("");
+        $('#nombre').val("");
+        $('#correo').val("");
+        $('#telefono').val("");
+        $('#celular').val("");
+        $('#direccion').val("");
+    }
 
     function refrescar(objeto) {
         console.log(objeto);
-            $('#id_alumno').val(objeto.noControl);
-            $('#nombre').val(objeto.nomAlumno);
-            $('#correo').val(objeto.correo);
-            $('#telefono').val(objeto.telefono);
-            $('#celular').val(objeto.celular);
-            $('#direccion').val(objeto.direccion);
-    }
-        
-    window.onload = function() {
+        $('#id_alumno').val(objeto.noControl);
+        $('#nombre').val(objeto.nomAlumno);
+        $('#correo').val(objeto.correo);
+        $('#telefono').val(objeto.telefono);
+        $('#celular').val(objeto.celular);
+        $('#direccion').val(objeto.direccion);
+        (objeto.genero ==='M' ? 
+            $('#genM').prop("checked",true) :
+            (objeto.genero ==='F' ? 
+                $('#genF').prop("checked",true) : 
+                $('#genF').prop("checked",false),$('#genM').prop("checked",false)));
 
-        document.getElementById("btnAjax").addEventListener("click",pedirHeader);
-        document.getElementById("btnAjaxReset").addEventListener("click",reiniciarHeader);
-        
-        function pedirHeader() {
-        
-        var solicitud = new XMLHttpRequest();          
-        solicitud.onreadystatechange = function() {  
-    
-            if (solicitud.readyState == 4 && solicitud.status == 200) {                
-                document.getElementById("divHeader").innerHTML = solicitud.responseText; 
-        }};
-        
-        solicitud.open("GET", "./resources/Archivo.txt", true);
-        solicitud.send();
-        
-         }
-        
-        function reiniciarHeader() {
-            document.getElementById("divHeader").innerHTML = "<h1 class=\"h3 mb-3 font-weight-normal\">Registro de alumno</h1>"; 
-        }
-        
+        (objeto.discapacidad === 1 ? $('#chkDisc').prop("checked",true) : $('#chkDisc').prop("checked",false));
+
+        (objeto.estadoCivil === "Casado" ? 
+            $('#civCas').prop("checked",true) : 
+            (objeto.estadoCivil === "Soltero" ? 
+                $('#civSol').prop("checked",true) : 
+                $('#civSol').prop("checked",false),$('#civCas').prop("checked",false)));
     }
 
-    $('#btnProm').click(function()
-    {
-        let promesa = new Promise(function(resolve,reject) {
-            var solicitud = new XMLHttpRequest();
-            solicitud.onreadystatechange = function(){
-                if(solicitud.readyState == 4 && solicitud.status == 200){
-                    resolve(solicitud.response);
+    $('#btnSubmit').click(function() {
+        let nom = $('#nombre').val();
+        let cor = $('#correo').val();
+        let tel = $('#telefono').val();
+        let cel = $('#celular').val();
+        let dir = $('#direccion').val();
+        let gen = $('#genF').prop('checked') ? 'F' : 'M';
+        let disc= $('#chkDisc')[0].checked ? 1 : 0;
+        let est = $('#civSol').prop('checked') ? 'Soltero' : 'Casado';
+
+        $.post('./php/Registrar.php',{nombre:nom,correo:cor,telefono:tel,celular:cel,direccion:dir,genero:gen,discapacidad:disc,estado:est},function(data){
+            if(data === false){
+                $('#alert1').show();
+            } else {
+                $('#msgExito').text('Se ha registrado al alumno con No. de control '+data);
+                $('#modalSuccess').modal('show');
+                if(data != ""){
+                    $.post('./php/DB.php',{id:data},function(result){
+                        if(result!=false){
+                            refrescar(result);
+                        } else {
+                            $('#msgError').text('El alumno no existe.');
+                            $('#modalError').modal('show');
+                        }
+                    },'json');
                 }
             }
-            solicitud.open("GET","./resources/ArchivoPromesa.txt",true);
-            solicitud.send();
-        });
-
-        promesa.then(function(value) {document.getElementById("divHeader").innerHTML = value;});
+        },'json');
     });
 
-
-    //Fetch
-    $('#btnFetch').click(function()
-    {
-        let promesa = fetch('./php/archivo.php');
-
-        //promesa.then(respuesta => respuesta.json())
-        //      .then(datos => console.log(datos));
-
-        promesa.then(respuesta => respuesta.json())
-                .then(datos => {
-                    console.log(datos);
-                    $('#id_alumno').val(datos.NumControl);
-                    $('#nombre').val(datos.Nombre);
-                    $('#correo').val(datos.Correo);
-                    $('#telefono').val(datos.Telefono);
-                    $('#celular').val(datos.Movil);
-                    $('#direccion').val(datos.Direccion);
-                    }
-                    );
+    $('#btnDel').click(function() {
+        let idalumno = $('#id_alumno').val();
+        if(idalumno != ""){
+            $.post('./php/Eliminar.php',{id:idalumno},function(data){
+                if(data!=0){
+                    limpiar();
+                    $('#msgExito').text('Se ha eliminado al alumno exitosamente');
+                    $('#modalSuccess').modal('show');
+                } else {
+                    $('#msgError').text('No se encontro al alumno.');
+                    $('#modalError').modal('show');
+                }
+            },'json');
+        } else
+        {
+            $('#msgError').text('No se ha consultado a ningun alumno.');
+            $('#modalError').modal('show');
+        }
     });
 
+    $('#btnMod').click(function() {
+        let idalumno = $('#id_alumno').val();
+        let nom = $('#nombre').val();
+        let cor = $('#correo').val();
+        let tel = $('#telefono').val();
+        let cel = $('#celular').val();
+        let dir = $('#direccion').val();
+        let gen = $('#genF').prop('checked') ? 'F' : 'M';
+        let disc= $('#chkDisc')[0].checked ? 1 : 0;
+        let est = $('#civSol').prop('checked') ? 'Soltero' : 'Casado';
+
+        if(idalumno != "") {
+            $.post('./php/Modificar.php',{id:idalumno,nombre:nom,correo:cor,telefono:tel,celular:cel,direccion:dir,genero:gen,discapacidad:disc,estado:est},function(result){
+                if(result!=0){
+                    $('#msgExito').text('Se ha modificado la informacion del alumno exitosamente');
+                    $('#modalSuccess').modal('show');
+                } else {
+                    $('#msgError').text('Llene todos los campos.');
+                    $('#modalError').modal('show');
+                }
+            },'json');
+        } else {
+            $('#msgError').text('Consulte a un alumno.');
+            $('#modalError').modal('show');
+        }
+    });
 });
